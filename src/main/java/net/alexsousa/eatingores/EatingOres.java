@@ -1,10 +1,8 @@
-package net.alexsousa.eatores;
-
-import net.alexsousa.eatores.item.EdibleMinerals;
-import org.slf4j.Logger;
+package net.alexsousa.eatingores;
 
 import com.mojang.logging.LogUtils;
-
+import net.alexsousa.eatingores.block.RandomBlocks;
+import net.alexsousa.eatingores.item.EdibleMinerals;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
@@ -20,19 +18,19 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(EatingOres.MODID)
-public class EatingOres
-{
+public class EatingOres {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "eatingores";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
+
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public EatingOres(IEventBus modEventBus, ModContainer modContainer)
-    {
+    public EatingOres(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -42,6 +40,7 @@ public class EatingOres
         NeoForge.EVENT_BUS.register(this);
 
         EdibleMinerals.register(modEventBus);
+        RandomBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -50,8 +49,7 @@ public class EatingOres
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 
@@ -64,29 +62,30 @@ public class EatingOres
     }
 
     // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS){
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(EdibleMinerals.BISMUTH);
             event.accept(EdibleMinerals.RAW_BISMUTH);
-            event.accept(EdibleMinerals.WATER_BLOCK);
+            event.accept(EdibleMinerals.ITEM_OF_WATER);
+            event.accept(EdibleMinerals.ITEM_OF_LAVA);
+        }
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(RandomBlocks.BISMUTH_BLOCK);
+            event.accept(RandomBlocks.BISMUTH_ORE);
         }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
+    public void onServerStarting(ServerStartingEvent event) {
 
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
         }
     }
 }

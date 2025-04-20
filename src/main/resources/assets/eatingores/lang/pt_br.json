@@ -1,5 +1,9 @@
 {
   "item.eatingores.bismuth": "Bismuto",
   "item.eatingores.raw_bismuth": "Bismuto Bruto",
-  "item.eatingores.water_block": "Bloco de Água"
+  "item.eatingores.item_of_water": "Bloco de Água",
+  "item.eatingores.item_of_lava": "Bloco de Lava",
+
+  "block.eatingores.bismuth_block": "Bloco de Bismuto",
+  "block.eatingores.bismuth_ore": "Minério de Bismuto"
 }

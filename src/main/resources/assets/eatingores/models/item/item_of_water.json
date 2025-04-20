@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "eatingores:item/water_block"
+    "layer0": "eatingores:item/item_of_water"
   }
 }

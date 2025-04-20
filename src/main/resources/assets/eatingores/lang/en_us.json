@@ -1,5 +1,10 @@
 {
   "item.eatingores.bismuth": "Bismuth",
   "item.eatingores.raw_bismuth": "Raw Bismuth",
-  "item.eatingores.water_block": "Block of Water"
+  "item.eatingores.item_of_water": "Item of Water",
+  "item.eatingores.item_of_lava": "Item of Lava",
+
+  "block.eatingores.bismuth_block": "Block of Bismuth",
+  "block.eatingores.bismuth_ore": "Ore of Bismuth"
+
 }
